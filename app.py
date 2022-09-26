@@ -46,7 +46,19 @@ def safety():
 @app.route("/tools/")
 def tools():
     pagin = "tools"
-    return render_template("tools.html", pagin = pagin)
+    tools = list()
+    usersAll = db.child("ferramentas").child("antimalware").get()
+    for ferramenta in usersAll.each():
+        tool = ferramenta.val()
+        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
+        tools.append(dict_tools)
+    usersAll = db.child("ferramentas").child("antivirus").get()
+    for ferramenta in usersAll.each():
+        tool = ferramenta.val()
+        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
+        tools.append(dict_tools)
+        
+    return render_template("tools.html", tools = tools, pagin=pagin)
 
 
 

@@ -1,23 +1,34 @@
 {% extends "base.html"%}
 {% block content %}
 <main class="header_main_tools">
+
     <div class="hed_tools">
         <div class="title_tools">
-            <h1 class="title_safety_txt  tit_h1">Ferramentas</h1>
-            <h1 class="title_safety_txt  tit_h2">Ferramentas</h1>
+            <h1 class="tit_h1">Ferramentas</h1>
+            <h1 class="tit_h2">Ferramentas</h1>
         </div>
-        <section class="cards_tools">
-            <div class="card_tools">
-                <div class="card_top_tools">
+        <div class="supercard_tools">
+            {% for tool in tools %}
+            <h1 class="tit_tools">tool["Title"]</h1>
+            <section class="cards_tools">
+                <div class="card_tools">
+                    <div class="card_top_tools">
+                        <h2 class="title_card_tool">Kaspery</h2>
+                        <span class="titlesecond_card_tool">Anti-Malware</span>
+                    </div>
+                    <div class="card_media_1"></div>
 
+                    <div class="bottom_card_tools">
+                        <span class="bottom_desc_tool">Ferramenta de malware, usada proteger softwares contra virus e
+                            ameaças, identificam ameaças, investigam o sistema para ver se há perigos.</span>
+                        <div class="item_card_bottom">
+                            <a href=""><button class="card_bottom_action_buttom">Ver Mais</button></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card_media_1"></div>
-
-                <div class="bottom_card_tools">
-                    
-                </div>
-            </div>
-        </section>
+            </section>
+            {% endfor %}
+        </div>
     </div>
 </main>
 {% endblock %}
