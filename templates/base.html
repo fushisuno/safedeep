@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css')}}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Safe</title>
+
+</head>
+<body>
+    <nav class="nav_menu">
+        <div class="nav_menu_container">
+            <a href="/index" class="nav_logo">Safe Deep</a>
+            <ul class="nav_list">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/safety">Safety</a>
+                    {% if pagin == 'safety' %}
+                    <div class="sub_menu1">
+                        <ul>
+                            <li><a href="#securty">Segurança</a></li>
+                            <li><a href="#engineering">Engenharia</a></li>
+                            <li><a href="#business">Comércio</a></li>
+                            <li><a href="#attacks">Invasores</a></li>
+                            <li><a href="#crim">Crimes</a></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <div class="sub_menu">
+                        <ul>
+                            <li><a href="/safety">Segurança</a></li>
+                            <li><a href="/safety">Engenharia</a></li>
+                            <li><a href="/safety">Comércio</a></li>
+                            <li><a href="/safety">Invasores</a></li>
+                            <li><a href="/safety">Crimes</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                </li>
+                <li><a href="/tools/">Tools</a>
+                    {% if pagin == 'tools' %}
+                        <div class="sub_menu">
+                            <ul>
+                                <li><a href="#antivirus">Anti-virus</a></li>
+                                <li><a href="#antispan">Anti-span</a></li>
+                                <li><a href="#malware">Malware</a></li>
+                                <li><a href="#fireware">Fireware</a></li>
+                                <li><a href="#criptografia">Criptografia</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="sub_menu">
+                            <ul>
+                                <li><a href="/tools">Anti-virus</a></li>
+                                <li><a href="/tools">Anti-span</a></li>
+                                <li><a href="/tools">Malware</a></li>
+                                <li><a href="/tools">Fireware</a></li>
+                                <li><a href="/tools">Criptografia</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </li>
+                <li><a href="/fishy">Fishy</a>
+                    <div class="sub_menu">
+                        <ul>
+                            <li><a href="/fishys">Denuncias</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav_search_box">
+                        <input type="text" class="nav_search_text" placeholder="Pesquisar">
+                        <a href="" class="nav_search_btn"><i class="uil uil-search"></i></a>
+                    </div>
+                </li>
+                
+                {% if session.user_name %}
+                <li><a href="/profile" class="uil"><img src="{{ url_for('static', filename='../static/img/personoid_anoy1.png')}}" alt=""></a></li>
+                {% else %}
+                <li><a href="/login" class="uil uil-user"></a></li>
+                {% endif %}
+                 <li><a href="" class="uil uil-star"></a></li>
+                {% if session.user_name %}
+                <li><a href="/logout"><i class="uil uil-sign-out-alt"></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='../static/js/main.js') }}"></script>
+</body>
+</html>

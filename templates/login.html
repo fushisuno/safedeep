@@ -1,0 +1,19 @@
+{% extends "base.html"%}
+{% block content %}
+<header class="header_area_form">
+    <div class="header_area_container">
+        <img src="../static/img/personoid_cad.svg" alt="Progaming" class="header_area_container_img_personoid_cad">
+        <div class="container_area_form">
+            <div class="container_area_log">
+                <img src="../static/img/logo_login.png" alt="Imagem Logo" class="container_area_logo">
+                <form action="/login" method="post">
+                    <input type="email" name="user_email" placeholder="Digite seu email" class="container_form_input {{ camps['email'] }}" required>
+                    <input type="password" name="password" placeholder="Sua senha" class="container_form_input {{ camps['pass'] }}" required>
+                    <input type="submit" value="Entrar" class="container_area_log_btn_form">    
+                </form>
+                <p>Ainda não te conta ? <a href="/cadastro" class="container_area_log_text">Crie sua conta aqui.</a></p>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

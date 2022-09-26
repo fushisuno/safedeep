@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+{% block content %}
+<main class="pag_profile">
+    <div class="profile_header">
+        <div class="profile">
+            <div class="itens_profile">
+                <div class="img_profile"><img src="{{ url_for('static', filename='../static/img/sans.jpg') }}" alt="Perfil" class="img_P"></div>
+                <div class="name_profile"><h2 class="nome_P">{{dados_user['Nome']}}</p></div>
+                <div class="email_profile"><p class="email_P">@{{dados_user['Email']}}</p></div>
+                <div class="btn_profile">
+                    <a href=""><button class="btns_profile btn_prof_comp">Compartilhar</button></a>
+                    <a href="/profile/edit"><button class="btns_profile btn_prof_env">Editar</button></a>
+                    
+                </div>    
+            </div>
+        </div>
+    </div>
+    <div class="coment_profile">
+       
+    </div>
+</main>
+{% endblock %}
