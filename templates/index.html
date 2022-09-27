@@ -1,24 +1,19 @@
 {% extends "base.html"%}
 {% block content %}
 
-<header></header>
-<main class="main_home">
-    <div class="hed_main_index">
-        <div class="textual_main">
-            <div class="title_main">
+<main class="main_index">
+    <div class="hed_index">
+        <div class="text_page">
+            <div class="tile_index">
                 <h1 class="container_text txt_h1">Safe Deep</h1>
                 <h1 class="container_text2 txt_h1">Safe Deep</h1>
             </div>
-            <div class="main_text" >
-                <p>Bem vindo ao seu novo lar <br> Aqui vamos te manter seguro <br> Seus arquivos serão Top Secret</p>
-            </div>
+            <p>Bem vindo ao seu novo lar <br> Aqui vamos te manter seguro <br> Seus arquivos serão Top Secret</p>
         </div>
-        <div class="main_img">
-            <img src="{{ url_for('static', filename='./img/personoid_secret.svg')}}" alt="Progaming" class="header_container_img">
+        <div class="img_index">
+            <img src="{{ url_for('static', filename='./img/personoid_secret.svg')}}" alt="Progaming"
+                class="header_container_img">
         </div>
     </div>
-</main>
-<main class="back_ground_black">
-
 </main>
 {% endblock %}
