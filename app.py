@@ -47,17 +47,24 @@ def safety():
 def tools():
     pagin = "tools"
     tools = list()
+    lista_tool = list()
     usersAll = db.child("ferramentas").child("antimalware").get()
     for ferramenta in usersAll.each():
         tool = ferramenta.val()
         dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
-        tools.append(dict_tools)
+        lista_tool.append(dict_tools)
+    dic_tip = {"Tipo_tool": " Anti-Malware", "Valor": lista_tool, "Class_id": "malware"}
+    tools.append(dic_tip)
+
+    lista_tool = list()
     usersAll = db.child("ferramentas").child("antivirus").get()
     for ferramenta in usersAll.each():
         tool = ferramenta.val()
         dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
-        tools.append(dict_tools)
-        
+        lista_tool.append(dict_tools)
+    dic_tip = {"Tipo_tool": " Anti-virus", "Valor": lista_tool, "Class_id": "antivirus"}
+    tools.append(dic_tip)
+
     return render_template("tools.html", tools = tools, pagin=pagin)
 
 

@@ -672,7 +672,8 @@ form small {
 .hed_tools{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     flex-wrap: wrap;
 }
 .title_tools{
@@ -702,10 +703,11 @@ form small {
     flex-direction: column;
     justify-content: left;
     align-items: center;
+    margin-bottom: 3%;
 }
 .supercard_tools .tit_tools{
     display: flex;
-    width: 90%;
+    width: 100%;
     justify-content: left;
     align-items: center;
     color: #7c1cf2;
@@ -715,51 +717,55 @@ form small {
     font-size: 2vw;
 }
 .cards_tools {
-    width: 90%;
+    width: 100%;
     display: flex;
-    justify-content: left;
-    align-items: center;
-    margin-left: 5%;
-    margin-right: 5%;
     justify-content: space-around;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5%;
 }
 .card_tools {
     flex-wrap: wrap;
-    width: 30%;
+    width: 32%;
     background-color: #e2e2e2;
     border-radius: 20px;
     box-shadow: 0px 2px 23px #1a191960;
+    line-height: -20%;
 }
 .card_top_tools {
     font-family: 'Poppins', sans-serif;
     padding: 20px;
+    line-height: -10%;
 }
 .card_top_tools h2{
-    font-size: 1.4vw;
+    font-size: 1.2vw;
     letter-spacing: 1.5px;
 }
-.card_top_tools span{
-    font-size: 0.8vw;
+.card_top_tools p{
+    font-size: 1vw;
 }
 .bottom_card_tools {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 2%;
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
 .bottom_card_tools .bottom_desc_tool{
-    font-size: 0.85vw;
-    padding: auto;
+    width: 100%;
+    font-size: 1vw;
+    padding: 0.2vw;
+    line-height: -50%;
 }
 .bottom_card_tools .item_card_bottom{
-    margin-top: 1%;
+    margin-top: 0.6%;
+    margin-left: 1%;
     display: flex;
     justify-self: left;
     align-items: center;
+    line-height: -2vw;
 }
 .card_bottom_action_buttom {
-    font-size: 0.75vw;
+    font-size: 0.85vw;
     background: none;
     border: none;
     color: #1196fc;
@@ -769,95 +775,55 @@ form small {
     cursor: pointer;
     text-decoration: underline;
 }
-
+.med_img{
+    height: 10vw;
+    width: 100%;
+}
 .card_media_1 {
     background: url("http://www.cloverit.com.br/wp-content/uploads/2015/04/Kaspersky-lab.png") center/cover;
-    height: 8vw;
-    width: 100%;
 }
-
 .card_media_2 {
-    background: url("https://blog.saninternet.com/wp-content/uploads/2019/08/bitdefender.png") center/cover;
-    height: 250px;
-    width: 100%;
+    background: url("https://www.nutanix.com/content/dam/nutanix/logos/with-padding/logo_bit-defender.png") center/cover;
 }
-
 .card_media_3 {
     background: url("https://crdms.images.consumerreports.org/prod/products/cr/models/395974-antivirus-for-windows-malwarebytes-premium-61809.png") center/cover;
-    height: 250px;
-    width: 100%;
-}
 
+}
 .card_media_4 {
     background: url("https://crdms.images.consumerreports.org/prod/products/cr/models/395835-antivirus-for-mac-avira-free-antivirus-for-mac-61785.png") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_5 {
     background: url("https://logosmarcas.net/wp-content/uploads/2021/12/Norton-Logo.png") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_6 {
     background: url("https://crdms.images.consumerreports.org/prod/products/cr/models/401146-free-anti-malware-programs-avg-antivirus-free-2020-10012711.png") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_7 {
     background: url("https://www.manga-reich.de/wp-content/uploads/2022/02/sanemi-shinazugawa.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_8 {
     background: url("https://sm.ign.com/ign_br/screenshot/default/giyu-tomioka-kimetsu-no-yaiba_sh3h.png") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_9 {
     background: url("https://i1.wp.com/images.gameswfu.net/demon-slayer-quem-e-muichiro-tokito-o-mist-hashira-6274b4cc5a46b.jpeg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_10 {
     background: url("https://ovicio.com.br/wp-content/uploads/maxresdefault-131.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_11 {
     background: url("https://img.quizur.com/f/img62edd5a1680059.33018483.png?lastEdited=1659753899") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_12 {
     background: url("https://www.nerdsite.com.br/wp-content/uploads/2022/04/jujutsu-kaisen-sukuna.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_13 {
     background: url("https://loucosporgeek.com.br/wp-content/uploads/2020/10/maxresdefault-1.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_14 {
     background: url("http://pm1.narvii.com/7672/e9f5c0febb5b87b89a31d505142423132ca6f7b0r1-2048-1152v2_uhq.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
-
 .card_media_15 {
     background: url("https://www.greenscene.co.id/wp-content/uploads/2020/05/One-Piece-2-696x497.jpg") center/cover;
-    height: 250px;
-    width: 100%;
 }
 
 
