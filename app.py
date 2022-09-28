@@ -1,5 +1,6 @@
 from random import randint, random
 from flask import *
+from jinja2 import Environment
 
 import pyrebase
 import re
@@ -17,19 +18,18 @@ firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
 auth = firebase.auth()
-
-user_name_session = ""
 anonymus = ""
 pagin = "index"
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
 app = Flask(__name__)
 app.secret_key = "APK_SESION_IS"
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 
 @app.route("/")
 @app.route("/index")
-def home():
+def home(): 
     pagin = "index"
     return render_template("index.html")
 
@@ -104,10 +104,8 @@ def cadastro():
             user_password = "" + request.form["user_password"]
             user_confirmed_pass = "" + request.form["confirmed_password"]
             dados = { "Nome": request.form["user_name"], "Email": request.form["user_email"]}
-
             if len(user_name) < 4:
                 camps['name'] = "camp_invalid"
-                print(camps['name'])
             else:
                 camps['name'] = "camp_sucess"
                 confirmed += 1
@@ -129,7 +127,11 @@ def cadastro():
                 if user_password == user_confirmed_pass:
                     try:
                         auth.create_user_with_email_and_password(user_email, user_password)
-                        db.child("users").child(db.generate_key()).set(dados)
+                        id_us = db.generate_key()
+                        print("criou")
+                        db.child("users").child(id_us).set(dados)
+                        db.child("users").child(id_us).child("denuncias_curtidas").set("")
+
                     except:
                         return redirect('/login')
                     return redirect("/login")
@@ -166,33 +168,70 @@ def fishy():
 @app.route("/fishys")
 def fishys():
     users = list()
-    usersAll = db.child("denuncias").get()
-    for i in usersAll.each():
-        user = i.val()
-        if user['opcao'] == "invasor":
-            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
-        else:
-            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
-        users.append(dict_user)
-
-    return render_template("fishys.html", users = users)
-@app.route("/fishys/<id_den>")
-def fishy_liked(id_den):
-    id_fishys_liked = {}
-    usersAll = db.child("denuncia").get()
+    denun = list()
+    usersFish = db.child("denuncias").get()
+    usersAll = db.child("users").get()
     for i in usersAll.each():
         user = i.val()
         user_valid = user['Email']
-        user_session = session['user_name']
-        sys = user_valid.split("@")
-        if user_valid == user_session:
+        print(session["user_name"])
+        if user_valid == session["user_name"]:
+            den = db.child("users").child(i.key()).child("denuncias_curtidas").get()
+            qtd_den = den.val()
+            if qtd_den != None:
+                for fishy_den in den.each():
+                    nun = {"Id": fishy_den.key()}
+                    denun.append(nun)
+        else:
+            denun = list()
+
+    for i in usersFish.each():
+        user = i.val()
+        liked_fh = False
+        if len(denun) > 0:
+            for id_fh in denun:
+                if id_fh["Id"] == i.key():
+                        liked_fh = True
+        if user['opcao'] == "invasor": 
+            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
+        else:
+            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
+        dict_user["Fishy_liked"] = liked_fh
+        users.append(dict_user)
+    
+    return render_template("fishys.html", users = users)
+
+@app.route("/fishys/add/<id_den>")
+def fishy_liked(id_den):
+    id_fishys_liked = {}
+    usersAll = db.child("users").get()
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        if user_valid == session['user_name']:
             id_fishys_liked = {"Id": str(id_den)}
-            db.child("denuncias").child(i.key()).child("denuncias_curtidas").set(id_fishys_liked)
-    return redirect("/")
+            db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).set("Liked")
+        else:
+            return redirect("/login")
+    return redirect("/fishys")
+
+
+@app.route("/fishys/del/<id_den>")
+def fishy_deleted(id_den):
+    usersAll = db.child("users").get()
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        if user_valid == session['user_name']:
+            db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).remove()
+        else:
+            return redirect("/login")
+    return redirect("/fishys")
 
 @app.route("/logout")
 def logout():
     session.pop("user_name", default=None)
+    session["user_name"] = ""
     return redirect("/")
 
 @app.route("/profile/")

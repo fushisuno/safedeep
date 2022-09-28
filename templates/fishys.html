@@ -31,12 +31,17 @@
                 <div class="bottom_card_fishys">
                     <h3>Descrição </h3>
                     <p class="card_bottom_text">{{ user["Descricao"] }}</p>
+
                 </div>
-                <a href="/fishys/{{ user['ID_Fishy'] }}" class="uil uil-star"></a>
+                <div class="it_bottom">
+                    {% if user['Fishy_liked'] == True %}
+                    <a href="/fishys/del/{{ user['ID_Fishy'] }}"><i class="uil uil-thumbs-up star"></i></a>
+                    {% else %}
+                    <a href="/fishys/add/{{ user['ID_Fishy'] }}" class="uil uil-star star"></a>
+                    {% endif %}
+                </div>
             </div>
-
             {% endfor %}
-
         </section>
     </div>
 </main>

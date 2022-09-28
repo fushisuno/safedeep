@@ -14,6 +14,38 @@ firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
 
+
+users = list()
+denun = list()
+usersFish = db.child("denuncias").get()
+usersAll = db.child("users").get()
+for i in usersAll.each():
+    user = i.val()
+    user_valid = user['Email']
+    den = db.child("users").child(i.key()).child("denuncias_curtidas").get()
+    qtd_den = den.val()
+    if qtd_den != None:
+        for fishy_den in den.each():
+            nun = {"Id": fishy_den.key()}
+            denun.append(nun)
+    else:
+        denun.append("Null")
+
+for i in usersFish.each():
+    user = i.val()
+    liked_fh = ""
+    for id_fh in denun:
+        if id_fh["Id"] == i.key():
+                liked_fh = True
+    if user['opcao'] == "invasor": 
+        dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
+    else:
+        dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
+    dict_user["Fishy_liked"] = liked_fh
+    users.append(dict_user)
+    
+
+
 '''
 tools = list()
 lista_tool = list()
@@ -44,9 +76,11 @@ for i in range(0, len(nome)):
     db.child("ferramentas").child("antivirus").child(db.generate_key()).set(dados)
 '''
 
+'''
 u = int(input())
 nome = ["Avira", "Norton", "AVG"]
 for i in range(0, len(nome)):
     dados = {"Nome": nome[i], "Tipo": "Anti-Vírus", "Title": "Ferramentas  Anti-Vírus", "Descricao": "Ferramenta de anti-virus, usada para proteger, detectar, impedir, previnir e realizar a remoção de softwares maliciosos, vírus e worms.", "Id_media": u}
     u += 1
     db.child("ferramentas").child("antivirus").child(db.generate_key()).set(dados)
+'''
