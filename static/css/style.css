@@ -207,7 +207,8 @@ nav ul li:hover .sub_menu1 ul li:hover {
     align-items: left;
 }
 .text_page p{
-    font-size: 1.5vw;
+    font-size: 1.2vw;
+    transform: translate(0%, -50%);
 }
 .tile_index{
     height: auto;
@@ -325,7 +326,7 @@ nav ul li:hover .sub_menu1 ul li:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin-bottom: 10%;
 }
 
 .hed_fishy {
@@ -348,7 +349,6 @@ nav ul li:hover .sub_menu1 ul li:hover {
 }
 
 .form_fishy {
-    transform: translate(0px, -20px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -358,12 +358,12 @@ nav ul li:hover .sub_menu1 ul li:hover {
     background-color: #1a1919;
     color: #c1c0c0;
     border-radius: 15px;
-    width: 50%;
+    width: 60%;
     padding: 35px;
 }
 
 .form_fishy form {
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -384,7 +384,7 @@ nav ul li:hover .sub_menu1 ul li:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: 1.6vw;
     letter-spacing: 2px;
 }
 
@@ -554,7 +554,7 @@ nav ul li:hover .sub_menu1 ul li:hover {
     font-size: 1.4vw;
     margin-bottom: 20px;
 }
-.bottom_card_fishys span{
+.bottom_card_fishys p{
     width: 100%;
     font-size: 0.9vw;
 }
@@ -579,6 +579,7 @@ nav ul li:hover .sub_menu1 ul li:hover {
 }
 
 .header_area_form {
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -587,51 +588,48 @@ nav ul li:hover .sub_menu1 ul li:hover {
 }
 
 .header_area_container {
-    transform: translate(0%, 8vh);
+    transform: translate(0%, 5%);
     height: auto;
-    width: auto;
-    height: auto;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins' sans-serif;
 }
-
+.img_crud{
+    margin-top: 3%;
+    width: 50%;
+}
 .header_area_container_img_personoid_cad {
-    margin-left: 0px;
-    margin-top: 10px;
-    width: 650px;
-    height: auto;
+    width: 90%;
 }
-
 .container_area_form {
+    width: 50%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     overflow: hidden;
-    height: auto;
 }
 
 .container_area_log {
-    margin-left: 50px;
+    width: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #1a1919;
     color: #c1c0c0;
-    border-radius: 15px;
-    width: 500px;
-    padding: 35px;
+    border-radius: 1.5vw;
+    padding: 2vw;
 }
 
 .container_area_log img {
-    width: 200px;
+    width: 50%;
     height: auto;
 }
 
 .container_area_log form {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 3%;
     display: flex;
     flex-direction: column;
 }
@@ -643,36 +641,25 @@ form {
 }
 
 form [type="submit"] {
-    margin-top: 15px;
     width: 90%;
     display: flex;
     background: #7c1cf2;
 }
-
-form small {
-    margin-bottom: -20PX;
-    transform: translate(-170px, 0px);
-    letter-spacing: 1.5px;
-    visibility: hidden;
-}
-
 .container_area_log form input {
-    margin-top: 10px;
-    border: 0px;
+    width: 25vw;
+    margin-top: 2%;
     color: #c1c0c0;
-    font-size: 15px;
+    font-size: 1vw;
     padding-left: 15px;
-    height: 50px;
+    height: 3.5vw;
     outline: none;
-    border-radius: 8px;
+    border-radius: 0.5vw;
+    border: none;
 }
-
 .input_form_cad {
     justify-content: inherit;
 }
-
 .container_form_input {
-    width: 90%;
     outline: 0;
     background-color: #575757;
 }
@@ -686,11 +673,12 @@ form small {
 }
 
 .container_area_log_btn_form {
+    font-family: 'Popins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px !important;
-    letter-spacing: 2px;
+    font-size: 1.1vw !important;
+    letter-spacing: 0.15vw;
 }
 
 .container_area_log_btn_form:hover {
@@ -700,8 +688,8 @@ form small {
 }
 
 .container_area_log p {
-    margin-top: 20px;
-    font-size: 16px;
+    margin-top: 5%;
+    font-size: 1vw;
     justify-content: center;
 }
 

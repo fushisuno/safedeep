@@ -170,13 +170,25 @@ def fishys():
     for i in usersAll.each():
         user = i.val()
         if user['opcao'] == "invasor":
-            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao']}
+            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
         else:
-            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao']}
+            dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
         users.append(dict_user)
 
     return render_template("fishys.html", users = users)
-
+@app.route("/fishys/<id_den>")
+def fishy_liked(id_den):
+    id_fishys_liked = {}
+    usersAll = db.child("denuncia").get()
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        user_session = session['user_name']
+        sys = user_valid.split("@")
+        if user_valid == user_session:
+            id_fishys_liked = {"Id": str(id_den)}
+            db.child("denuncias").child(i.key()).child("denuncias_curtidas").set(id_fishys_liked)
+    return redirect("/")
 
 @app.route("/logout")
 def logout():
