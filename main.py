@@ -15,6 +15,60 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
+pagin = "tools"
+tool_lik = list()
+tools = list()
+lista_tool = list()
+usersAll = db.child("users").get()
+
+for i in usersAll.each():
+    user = i.val()
+    user_valid = user['Email']
+    try:
+        den = db.child("users").child(i.key()).child("ferramentas_curtidas").get()
+        qtd_den = den.val()
+        if qtd_den != None:
+            for fishy_den in den.each():
+                nun = fishy_den.key()
+                tool_lik.append(nun)
+    except:
+        tool_lik = list()
+liked_fh = False       
+usersAll = db.child("ferramentas").child("antimalware").get()
+for ferramenta in usersAll.each():
+    tool = ferramenta.val()
+    if len(tool_lik) > 0:
+        if ferramenta.key() in tool_lik:
+                liked_fh = True
+        else:
+            liked_fh = False 
+    dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"]), "ID_Tool": "" + ferramenta.key()}
+    dict_tools["Tool_liked"] = liked_fh
+    lista_tool.append(dict_tools)
+dic_tip = {"Tipo_tool": " Anti-Malware", "Valor": lista_tool, "Class_id": "malware"}
+
+tools.append(dic_tip)
+
+lista_tool = list()
+liked_fh = False   
+usersAll = db.child("ferramentas").child("antivirus").get()
+for ferramenta in usersAll.each():
+    tool = ferramenta.val()
+    if len(tool_lik) > 0:
+        if ferramenta.key() in tool_lik:
+                liked_fh = True
+        else:
+            liked_fh = False 
+    dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"]), "ID_Tool": "" + ferramenta.key()}
+    dict_tools["Tool_liked"] = liked_fh
+    lista_tool.append(dict_tools)
+dic_tip = {"Tipo_tool": " Anti-virus", "Valor": lista_tool, "Class_id": "antivirus"}
+tools.append(dic_tip)
+
+
+
+
+'''
 users = list()
 denun = list()
 usersFish = db.child("denuncias").get()
@@ -43,8 +97,7 @@ for i in usersFish.each():
         dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Url": user['url_site'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
     dict_user["Fishy_liked"] = liked_fh
     users.append(dict_user)
-    
-
+ '''
 
 '''
 tools = list()

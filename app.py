@@ -44,29 +44,88 @@ def safety():
 @app.route("/")
 @app.route("/tools")
 @app.route("/tools/")
-def tools():
+def tools(): 
     pagin = "tools"
+    tool_lik = list()
     tools = list()
     lista_tool = list()
+    usersAll = db.child("users").get()
+
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        try:
+            den = db.child("users").child(i.key()).child("ferramentas_curtidas").get()
+            qtd_den = den.val()
+            if qtd_den != None:
+                for fishy_den in den.each():
+                    nun = fishy_den.key()
+                    tool_lik.append(nun)
+        except:
+            tool_lik = list()
+    liked_fh = False       
     usersAll = db.child("ferramentas").child("antimalware").get()
     for ferramenta in usersAll.each():
         tool = ferramenta.val()
-        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
+        if len(tool_lik) > 0:
+            if ferramenta.key() in tool_lik:
+                    liked_fh = True
+            else:
+                liked_fh = False 
+        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"]), "ID_Tool": "" + ferramenta.key()}
+        dict_tools["Tool_liked"] = liked_fh
         lista_tool.append(dict_tools)
     dic_tip = {"Tipo_tool": " Anti-Malware", "Valor": lista_tool, "Class_id": "malware"}
+
     tools.append(dic_tip)
 
     lista_tool = list()
+    liked_fh = False   
     usersAll = db.child("ferramentas").child("antivirus").get()
     for ferramenta in usersAll.each():
         tool = ferramenta.val()
-        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"])}
+        if len(tool_lik) > 0:
+            if ferramenta.key() in tool_lik:
+                    liked_fh = True
+            else:
+                liked_fh = False 
+        dict_tools = {"Nome": tool["Nome"], "Tipo": tool["Tipo"], "Title":  tool["Title"], "Descricao":  tool["Descricao"], "Media_img": "card_media_" + str(tool["Id_media"]), "ID_Tool": "" + ferramenta.key()}
+        dict_tools["Tool_liked"] = liked_fh
         lista_tool.append(dict_tools)
     dic_tip = {"Tipo_tool": " Anti-virus", "Valor": lista_tool, "Class_id": "antivirus"}
     tools.append(dic_tip)
 
     return render_template("tools.html", tools = tools, pagin=pagin)
 
+@app.route("/tools/add/<id_tol>")
+def tool_liked(id_tol):
+    id_tools_liked = {}
+    print(id_tol)
+    print(id_tol)
+    print(id_tol)
+    print(id_tol)
+    usersAll = db.child("users").get()
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        if user_valid == session['user_name']:
+            id_tools_liked = {"Id": str(id_tol)}
+            db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).set("Liked")
+        else:
+            return redirect("/login")
+    return redirect("/tools")
+
+@app.route("/tools/del/<id_tol>")
+def tool_deleted(id_tol):
+    usersAll = db.child("users").get()
+    for i in usersAll.each():
+        user = i.val()
+        user_valid = user['Email']
+        if user_valid == session['user_name']:
+            db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).remove()
+        else:
+            return redirect("/login")
+    return redirect("/tools")
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -131,6 +190,7 @@ def cadastro():
                         print("criou")
                         db.child("users").child(id_us).set(dados)
                         db.child("users").child(id_us).child("denuncias_curtidas").set("")
+                        db.child("users").child(id_us).child("ferramentas_curtidas").set("")
 
                     except:
                         return redirect('/login')
@@ -174,24 +234,23 @@ def fishys():
     for i in usersAll.each():
         user = i.val()
         user_valid = user['Email']
-        print(session["user_name"])
-        if user_valid == session["user_name"]:
-            den = db.child("users").child(i.key()).child("denuncias_curtidas").get()
-            qtd_den = den.val()
-            if qtd_den != None:
-                for fishy_den in den.each():
-                    nun = {"Id": fishy_den.key()}
-                    denun.append(nun)
-        else:
+        try:
+            if user_valid == session["user_name"]:
+                den = db.child("users").child(i.key()).child("denuncias_curtidas").get()
+                qtd_den = den.val()
+                if qtd_den != None:
+                    for fishy_den in den.each():
+                        nun = fishy_den.key()
+                        denun.append(nun)
+        except:
             denun = list()
 
     for i in usersFish.each():
         user = i.val()
         liked_fh = False
         if len(denun) > 0:
-            for id_fh in denun:
-                if id_fh["Id"] == i.key():
-                        liked_fh = True
+            if i.key() in denun:
+                liked_fh = True
         if user['opcao'] == "invasor": 
             dict_user = {"Nome": user['nome'], "Tipo": user['opcao'], "Nome_invasor": user['invasor'], "Descricao": user['descricao'], "ID_Fishy": "" + i.key()}
         else:

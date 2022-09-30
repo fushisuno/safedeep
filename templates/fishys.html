@@ -33,9 +33,9 @@
                     <p class="card_bottom_text">{{ user["Descricao"] }}</p>
 
                 </div>
-                <div class="it_bottom">
+                <div class="it_bot">
                     {% if user['Fishy_liked'] == True %}
-                    <a href="/fishys/del/{{ user['ID_Fishy'] }}"><i class="uil uil-thumbs-up star"></i></a>
+                    <a href="/fishys/del/{{ user['ID_Fishy'] }}" class="uil uil-thumbs-up star"></a>
                     {% else %}
                     <a href="/fishys/add/{{ user['ID_Fishy'] }}" class="uil uil-star star"></a>
                     {% endif %}

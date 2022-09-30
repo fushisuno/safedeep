@@ -174,9 +174,7 @@ nav ul li:hover .sub_menu1 ul li:hover {
     letter-spacing: 6px;
     font-size: 24px;
 }
-.uil-thumbs-up{
-    margin-top: -12%;
-}
+
 
 .uil img {
     width: 25px;
@@ -497,16 +495,12 @@ nav ul li:hover .sub_menu1 ul li:hover {
 .card_fishys {
     flex-wrap: wrap;
     width: 30%;
-    height: 17vw;
-    margin-bottom: 5%;
+    height: 100%;
+    margin-top: 3%;
     background-color: #e2e2e2;
-    border-radius: 20px;
+    border-radius: 5%;
     box-shadow: 0px 2px 23px #1a191960;
 }
-.card_fishys a{
-    width: 3%;
-}
-
 .hed_card_fishys {
     width: 100%;
     display: flex;
@@ -554,12 +548,6 @@ nav ul li:hover .sub_menu1 ul li:hover {
     margin-left: 5%;
     margin-right: 5%;
 }
-.card_fishys .it_bottom{
-    width: 3%;
-    font-size: 1.4vw;
-    margin-bottom: 1.3vw;
-    transform: translate(24vw, 0%);
-}
 .bottom_card_fishys p{
     width: 100%;
     font-size: 0.9vw;
@@ -570,15 +558,17 @@ nav ul li:hover .sub_menu1 ul li:hover {
     align-items: center;
     font-size: 1vw;
 }
-.star_bottom{
-    justify-content: right;
-    align-items: center;
+.it_bot{
+    width: 90%;
+    height: 20%;
+    margin-left: 5%;
+    margin-bottom: 5%;
 }
-.item_bottom{
-    width: 10%;
-    transform: translate(23vw, 0%);
-    justify-content: right;
+.it_bot a{
+    display: flex;
+    margin-left: 93%;
     align-items: center;
+    font-size: 1.4vw;
 }
 
 /* /Fishy */
@@ -830,6 +820,10 @@ form [type="submit"] {
     background: none;
     border: none;
     color: #1196fc;
+}
+.star_tol{
+    margin-left: 80%;
+    font-size: 1vw;
 }
 
 .card_bottom_action_buttom:hover {
