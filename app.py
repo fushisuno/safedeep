@@ -55,12 +55,13 @@ def tools():
         user = i.val()
         user_valid = user['Email']
         try:
-            den = db.child("users").child(i.key()).child("ferramentas_curtidas").get()
-            qtd_den = den.val()
-            if qtd_den != None:
-                for fishy_den in den.each():
-                    nun = fishy_den.key()
-                    tool_lik.append(nun)
+            if user_valid == session["user_name"]:
+                den = db.child("users").child(i.key()).child("ferramentas_curtidas").get()
+                qtd_den = den.val()
+                if qtd_den != None:
+                    for fishy_den in den.each():
+                        nun = fishy_den.key()
+                        tool_lik.append(nun)
         except:
             tool_lik = list()
     liked_fh = False       
@@ -100,10 +101,6 @@ def tools():
 @app.route("/tools/add/<id_tol>")
 def tool_liked(id_tol):
     id_tools_liked = {}
-    print(id_tol)
-    print(id_tol)
-    print(id_tol)
-    print(id_tol)
     usersAll = db.child("users").get()
     for i in usersAll.each():
         user = i.val()
@@ -111,9 +108,8 @@ def tool_liked(id_tol):
         if user_valid == session['user_name']:
             id_tools_liked = {"Id": str(id_tol)}
             db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).set("Liked")
-        else:
-            return redirect("/login")
-    return redirect("/tools")
+            return redirect("/tools")
+    return redirect("/login")
 
 @app.route("/tools/del/<id_tol>")
 def tool_deleted(id_tol):
@@ -123,9 +119,8 @@ def tool_deleted(id_tol):
         user_valid = user['Email']
         if user_valid == session['user_name']:
             db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).remove()
-        else:
-            return redirect("/login")
-    return redirect("/tools")
+            return redirect("/tools")
+    return redirect("/login")
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -270,9 +265,8 @@ def fishy_liked(id_den):
         if user_valid == session['user_name']:
             id_fishys_liked = {"Id": str(id_den)}
             db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).set("Liked")
-        else:
-            return redirect("/login")
-    return redirect("/fishys")
+            return redirect("/fishys")
+    return redirect("/login")
 
 
 @app.route("/fishys/del/<id_den>")
@@ -283,9 +277,8 @@ def fishy_deleted(id_den):
         user_valid = user['Email']
         if user_valid == session['user_name']:
             db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).remove()
-        else:
-            return redirect("/login")
-    return redirect("/fishys")
+            return redirect("/fishys")
+    return redirect("/login")
 
 @app.route("/logout")
 def logout():
