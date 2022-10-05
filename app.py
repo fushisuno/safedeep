@@ -105,10 +105,13 @@ def tool_liked(id_tol):
     for i in usersAll.each():
         user = i.val()
         user_valid = user['Email']
-        if user_valid == session['user_name']:
-            id_tools_liked = {"Id": str(id_tol)}
-            db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).set("Liked")
-            return redirect("/tools")
+        try:
+            if user_valid == session['user_name']:
+                id_tools_liked = {"Id": str(id_tol)}
+                db.child("users").child(i.key()).child("ferramentas_curtidas").child(id_tol).set("Liked")
+                return redirect("/tools")
+        except:
+            return redirect("/login")
     return redirect("/login")
 
 @app.route("/tools/del/<id_tol>")
@@ -262,10 +265,13 @@ def fishy_liked(id_den):
     for i in usersAll.each():
         user = i.val()
         user_valid = user['Email']
-        if user_valid == session['user_name']:
-            id_fishys_liked = {"Id": str(id_den)}
-            db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).set("Liked")
-            return redirect("/fishys")
+        try:
+            if user_valid == session['user_name']:
+                id_fishys_liked = {"Id": str(id_den)}
+                db.child("users").child(i.key()).child("denuncias_curtidas").child(id_den).set("Liked")
+                return redirect("/fishys")
+        except:
+            return redirect("/login")
     return redirect("/login")
 
 
